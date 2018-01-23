@@ -114,6 +114,9 @@ public class WechatInfoManageService {
 							}
 						} else {
 							logger.error("Get batch user info failed, the error code: {}, error info: {}", users.getErrcode(), users.getErrmsg());
+							if(users.getErrcode() == 40001) { // token expired
+								refreshToken();
+							}
 						}
 					} else {
 						logger.error("Cannot convert the result: {}", result);
