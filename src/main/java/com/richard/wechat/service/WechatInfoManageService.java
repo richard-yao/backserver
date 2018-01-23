@@ -70,7 +70,7 @@ public class WechatInfoManageService {
 				HashMap<String, Object> resultJson = objectMapper.readValue(result, HashMap.class);
 				if(resultJson != null && resultJson.containsKey("access_token") && resultJson.containsKey("expires_in")) {
 					accessToken = resultJson.get("access_token").toString();
-					logger.info("Get access token successfully! The access_token is {}", accessToken);
+					logger.info("Get access token successfully! The response info: {}", resultJson);
 				} else {
 					logger.error("Cannot get access_token, the error info {}", result);
 				}

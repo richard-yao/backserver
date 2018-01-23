@@ -20,7 +20,7 @@ public class WebsocketConfig extends WebMvcConfigurerAdapter implements WebSocke
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(systemWebSocketHandler(), "/websocket").addInterceptors(new DefaultHandshakeInterceptor());
+		registry.addHandler(systemWebSocketHandler(), "/websocket").setAllowedOrigins("*").addInterceptors(new DefaultHandshakeInterceptor());
 	}
 
 	@Bean
