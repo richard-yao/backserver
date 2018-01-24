@@ -10,4 +10,6 @@ package com.richard.wechat.util;
 public class FrequentUseParas {
 
 	public static int MAX_BATCH_GET_NUMBER = 100;
+	
+	public static final String WEBSOCEKT_ENDPOINT = "/websocket";
 }

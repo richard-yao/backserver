@@ -8,6 +8,8 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+import com.richard.wechat.util.FrequentUseParas;
+
 /**
 * @author RichardYao richardyao@tvunetworks.com
 * @date 2018年1月22日 下午2:31:43
@@ -20,7 +22,7 @@ public class WebsocketConfig extends WebMvcConfigurerAdapter implements WebSocke
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(systemWebSocketHandler(), "/websocket").setAllowedOrigins("*").addInterceptors(new DefaultHandshakeInterceptor());
+		registry.addHandler(systemWebSocketHandler(), FrequentUseParas.WEBSOCEKT_ENDPOINT).setAllowedOrigins("*").addInterceptors(new DefaultHandshakeInterceptor());
 	}
 
 	@Bean
