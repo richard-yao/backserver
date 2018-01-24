@@ -9,6 +9,7 @@ public class UserMessageInstance {
 	private String headimgurl;
 	private String content;
 	private String picUrl;
+	private String event;
 	
 	public String getNickname() {
 		return nickname;
@@ -33,5 +34,17 @@ public class UserMessageInstance {
 	}
 	public void setPicUrl(String picUrl) {
 		this.picUrl = picUrl;
+	}
+	/**
+	 * @return the event
+	 */
+	public String getEvent() {
+		return event;
+	}
+	/**
+	 * @param event the event to set
+	 */
+	public void setEvent(String event) {
+		this.event = event;
 	}
 }

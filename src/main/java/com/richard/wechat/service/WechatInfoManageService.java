@@ -329,6 +329,7 @@ public class WechatInfoManageService {
 					if(user != null && user.getOpenid() != null) {
 						logger.info("New subscriber: {}", user.getNickname());
 						subscribeUserMap.put(user.getOpenid(), user);
+						addSubscribeMessage(eventMsg);
 					}
 				}
 			} catch (Exception e) {
@@ -347,6 +348,10 @@ public class WechatInfoManageService {
 		return allInfo;
 	}
 	
+	public synchronized void addSubscribeMessage(EventMessageModel event) {
+		allMessageList.add(event);
+	}
+	
 	public synchronized List<UserMessageInstance> getAllMessage() {
 		List<UserMessageInstance> allMessage = new ArrayList<UserMessageInstance>();
 		if(allMessageList.size() > 0) {
@@ -361,6 +366,10 @@ public class WechatInfoManageService {
 					ImageMessageModel imgMsg = (ImageMessageModel) temp;
 					tempMsg.setPicUrl(imgMsg.getPicUrl());
 					openId = imgMsg.getFromUserName();
+				} else if(temp instanceof EventMessageModel) {
+					EventMessageModel event = (EventMessageModel) temp;
+					tempMsg.setEvent(event.getEvent());
+					openId = event.getFromUserName();
 				}
 				if(openId != null && subscribeUserMap.containsKey(openId)) {
 					UserBasicInfo tempUser = subscribeUserMap.get(openId);
