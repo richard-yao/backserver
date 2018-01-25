@@ -1,6 +1,10 @@
 # compiled target directory
 target/
 
+# eclipse project file
+.classpath
+.project
+
 # Compiled class file
 *.class
 
