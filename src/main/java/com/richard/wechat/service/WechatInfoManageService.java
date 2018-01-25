@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ import com.richard.wechat.util.ConfigurationUtil;
 import com.richard.wechat.util.FrequentUseParas;
 import com.richard.wechat.util.HttpsUtil;
 import com.richard.wechat.util.MyUtil;
+import com.richard.wechat.util.WechatEmojiDealComponent;
 
 /**
  * @author YaoXiansheng
@@ -54,6 +56,8 @@ public class WechatInfoManageService {
 	
 	@Autowired
 	private ConfigurationUtil configUtil;
+	@Autowired
+	private WechatEmojiDealComponent wechatEmojiDeal;
 	
 	public void refreshToken() {
 		logger.info("refreshToken task start!");
@@ -360,7 +364,12 @@ public class WechatInfoManageService {
 				String openId = null;
 				if(temp instanceof TextMessageModel) {
 					TextMessageModel textMsg = (TextMessageModel) temp;
-					tempMsg.setContent(textMsg.getContent());
+					String url = wechatEmojiDeal.emoji(textMsg.getContent());
+					if(StringUtils.isNotBlank(url)) {
+						tempMsg.setContent(url);
+					} else {
+						tempMsg.setContent(textMsg.getContent());
+					}
 					openId = textMsg.getFromUserName();
 				} else if(temp instanceof ImageMessageModel) {
 					ImageMessageModel imgMsg = (ImageMessageModel) temp;
